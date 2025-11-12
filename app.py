@@ -7,7 +7,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
 import zipfile
-from openai import OpenAI
 
 
 # --- PAGE CONFIG ---
@@ -60,6 +59,7 @@ st.caption("📄 Mode offline: data diambil dari match_results.csv")
 
 st.markdown("---")
 st.caption("Built by [Gusti Ayu Putu Febriyanti] — Rakamin Case Study 2025")
+
 
 
 
