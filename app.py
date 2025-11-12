@@ -4,7 +4,6 @@
 
 import streamlit as st
 import pandas as pd
-import zipfile
 
 
 # --- PAGE CONFIG ---
@@ -16,13 +15,17 @@ st.title("💼 AI Talent Match Dashboard")
 @st.cache_data
 def load_data():
     try:
-        with zipfile.ZipFile("match_results.zip", "r") as z:
-            with z.open("match_results.csv") as f:
-                df = pd.read_csv(f)
+        # Coba ambil dari Supabase
+        query = "SELECT * FROM talent.match_results;"
+        df = pd.read_sql(query, engine)
+        st.success("✅ Data berhasil dimuat dari Supabase!")
         return df
     except Exception as e:
-        st.error(f"❌ Gagal memuat data: {e}")
-        return pd.DataFrame()
+        st.error(f"❌ Gagal memuat data dari Supabase: {e}")
+        # fallback ke file lokal
+        st.warning("⚠️ Memuat data dari file lokal 'match_results_sample.csv'...")
+        df = pd.read_csv("match_results_sample.csv")
+        return df
 
 df = load_data()
 
@@ -57,6 +60,7 @@ st.caption("📄 Mode offline: data diambil dari match_results.csv")
 
 st.markdown("---")
 st.caption("Built by [Gusti Ayu Putu Febriyanti] — Rakamin Case Study 2025")
+
 
 
 
