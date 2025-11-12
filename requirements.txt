@@ -2,6 +2,5 @@ streamlit
 pandas>=2.2.2
 matplotlib
 seaborn
-sqlalchemy
-psycopg2-binary
 openai
+
