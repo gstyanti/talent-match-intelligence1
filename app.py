@@ -4,6 +4,10 @@
 
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sqlalchemy import create_engine
+from openai import OpenAI
 
 
 # --- PAGE CONFIG ---
@@ -42,11 +46,14 @@ filtered = df[(df["name_department"] == role) & (df["name_position"] == level)]
 st.write(f"Menampilkan hasil analisis untuk **{role}** — **{level}**")
 
 # --- VISUALISASI DISTRIBUSI ---
-st.subheader("📊 Distribusi Final Match Rate")
-fig, ax = plt.subplots(figsize=(6, 3))
-sns.histplot(filtered["final_match_rate"], bins=10, kde=True, ax=ax, color="skyblue")
-plt.title("Distribusi Final Match Rate")
-st.pyplot(fig)
+if filtered is None or filtered.empty:
+    st.warning("⚠️ Tidak ada data yang cocok dengan filter ini.")
+else:
+    fig, ax = plt.subplots(figsize=(6, 3))
+    sns.histplot(filtered["final_match_rate"], bins=10, kde=True, ax=ax, color="skyblue")
+    ax.set_title("Distribusi Final Match Rate")
+    st.pyplot(fig)
+
 
 # --- TOP KANDIDAT ---
 st.subheader("🏅 Top 10 Kandidat Berdasarkan Match Rate")
@@ -60,6 +67,7 @@ st.caption("📄 Mode offline: data diambil dari match_results.csv")
 
 st.markdown("---")
 st.caption("Built by [Gusti Ayu Putu Febriyanti] — Rakamin Case Study 2025")
+
 
 
 
