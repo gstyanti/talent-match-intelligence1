@@ -6,8 +6,7 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from sqlalchemy import create_engine
-from openai import OpenAI
+
 
 
 # --- PAGE CONFIG ---
@@ -67,6 +66,7 @@ st.caption("📄 Mode offline: data diambil dari match_results.csv")
 
 st.markdown("---")
 st.caption("Built by [Gusti Ayu Putu Febriyanti] — Rakamin Case Study 2025")
+
 
 
 
