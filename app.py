@@ -4,6 +4,10 @@
 
 import streamlit as st
 import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import zipfile
+from openai import OpenAI
 
 
 # --- PAGE CONFIG ---
@@ -15,8 +19,9 @@ st.title("💼 AI Talent Match Dashboard")
 @st.cache_data
 def load_data():
     try:
-        df = pd.read_csv("match_results.zip")
-        st.success("✅ Data berhasil dimuat dari file lokal (CSV).")
+        with zipfile.ZipFile("match_results.zip", "r") as z:
+            with z.open("match_results.csv") as f:
+                df = pd.read_csv(f)
         return df
     except Exception as e:
         st.error(f"❌ Gagal memuat data: {e}")
@@ -55,5 +60,6 @@ st.caption("📄 Mode offline: data diambil dari match_results.csv")
 
 st.markdown("---")
 st.caption("Built by [Gusti Ayu Putu Febriyanti] — Rakamin Case Study 2025")
+
 
 
