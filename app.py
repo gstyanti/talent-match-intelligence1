@@ -15,7 +15,7 @@ st.title("💼 AI Talent Match Dashboard")
 @st.cache_data
 def load_data():
     try:
-        df = pd.read_csv("match_results.csv")
+        df = pd.read_csv("match_results.zip")
         st.success("✅ Data berhasil dimuat dari file lokal (CSV).")
         return df
     except Exception as e:
@@ -55,4 +55,5 @@ st.caption("📄 Mode offline: data diambil dari match_results.csv")
 
 st.markdown("---")
 st.caption("Built by [Gusti Ayu Putu Febriyanti] — Rakamin Case Study 2025")
+
 
